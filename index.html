@@ -80,6 +80,9 @@ color:#f87171;
 <p style="margin:0; font-size:14px; opacity:0.7;">
 Missed Call Lead Capture System for Contractors
 </p>
+   <p style="margin-top:6px; font-size:13px; color:#e11d48; font-weight:bold;">
+🇺🇸 Veteran Owned & Operated
+</p>
 </header>
 
 <section>
@@ -186,13 +189,14 @@ Includes Twilio number setup, system configuration, and onboarding.
 <h2>Founding Contractor Program</h2>
 
 <p>
-The first 3 contractors receive:
+🚨 Launch Promotion (Now through May 31st)
 </p>
 
 <p>
-Setup fee waived<br>
-14 day free trial<br>
-Priority onboarding
+✔ Setup fee waived<br>
+✔ 14 day free trial<br>
+✔ Priority onboarding<br>
+✔ Commit to a multi-month plan and receive your first month FREE
 </p>
 
 </section>
@@ -220,6 +224,60 @@ Request a Demo
 <p>Contact: Code3leads@gmail.com</p>
 
 </section>
+  <section style="padding:40px; text-align:center;">
+
+<h2>Missed Call Revenue Calculator</h2>
+
+<p>
+Many contractors miss calls while on job sites. See how much revenue you could be losing.
+</p>
+
+<p>Missed calls per week:</p>
+
+<input id="missedCalls" type="number" value="5" style="padding:8px; width:80px;">
+
+<p>Average job value ($):</p>
+
+<input id="jobValue" type="number" value="500" style="padding:8px; width:100px;">
+
+<br><br>
+
+<button onclick="calculateLoss()" style="padding:12px 24px; background:#e11d48; color:white; border:none; border-radius:6px; cursor:pointer;">
+Calculate Lost Revenue
+</button>
+
+<h3 id="result" style="margin-top:20px;"></h3>
+
+</section>
+<footer style="background:#020617; padding:20px; text-align:center; margin-top:40px; font-size:13px; opacity:0.8;">
+
+<p>
+© 2026 Code 3 Leads. All Rights Reserved.
+</p>
+
+<p>
+🇺🇸 Veteran Owned & Operated
+</p>
+
+<p>
+Baltimore County, Maryland
+</p>
+
+</footer>
+
+<script>
+function calculateLoss() {
+
+let missedCalls = document.getElementById("missedCalls").value;
+let jobValue = document.getElementById("jobValue").value;
+
+let yearlyLoss = missedCalls * jobValue * 52;
+
+document.getElementById("result").innerHTML =
+"Estimated Lost Revenue Per Year: $" + yearlyLoss.toLocaleString() +
+"<br><br>Even capturing a small portion of these missed calls could generate thousands in additional revenue.";
+}
+</script>
 
 </body>
 </html>
