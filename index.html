@@ -226,7 +226,11 @@ a{
     ✔ Priority onboarding<br>
     ✔ Commit to a multi-month plan and receive your first month FREE
   </p>
+
   <a class="button" href="https://calendly.com/code3leads/30min" target="_blank">
+    Start Your Demo
+  </a>
+
 </section>
 
 <section style="padding:40px 20px; max-width:800px; margin:auto;">
@@ -259,15 +263,8 @@ a{
   <h3 id="result" style="margin-top:20px;"></h3>
 </section>
 
-<section>
-  <h2>See If Show Runner Works For Your Business</h2>
-
-  <a class="button" href="https://forms.gle/S8mMiPJ8PiQHbFEz5">
-    Request a Demo
-  </a>
-</section>
-
 <footer style="background:#020617; padding:20px; text-align:center; margin-top:40px; font-size:13px; opacity:0.8;">
+
   <p>
     <a href="privacy-policy.html" style="color:white; margin-right:15px;">Privacy Policy</a>
     <a href="messaging-policy.html" style="color:white; margin-right:15px;">Messaging Policy</a>
@@ -277,13 +274,14 @@ a{
   <p>© 2026 Code 3 Leads. All Rights Reserved.</p>
   <p>🇺🇸 Veteran Owned & Operated</p>
   <p>Baltimore County, Maryland</p>
- <p>
-Questions? Contact us at 
-<a href="mailto:code3leads@gmail.com?subject=Code%203%20Leads%20Inquiry" style="color:white;">
-code3leads@gmail.com
-</a>
-</p>
-  
+
+  <p>
+    Questions? Contact us at 
+    <a href="mailto:code3leads@gmail.com?subject=Code%203%20Leads%20Inquiry" style="color:white;">
+      code3leads@gmail.com
+    </a>
+  </p>
+
 </footer>
 
 <script>
@@ -294,7 +292,7 @@ function calculateLoss() {
   let yearlyLoss = missedCalls * jobValue * 52;
 
   document.getElementById("result").innerHTML =
-    "Estimated Lost Revenue Per Year: $" + yearlyLoss.toLocaleString() +
+    "Estimated Lost Revenue Per Year: $" + Number(yearlyLoss).toLocaleString() +
     "<br><br>Even capturing a small portion of these missed calls could generate thousands in additional revenue.";
 }
 </script>
