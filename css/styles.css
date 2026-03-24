@@ -1,1 +1,193 @@
+/* =========================
+   GLOBAL
+========================= */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #020617 0%, #000000 100%);
+  color: white;
+  text-align: center;
+}
 
+section {
+  padding: 70px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+  padding: 20px;
+  background: rgba(2,6,23,0.9);
+}
+
+.logo {
+  width: 260px;
+}
+
+.tagline {
+  font-size: 14px;
+  color: #e11d48;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #e11d48;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.button {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #e11d48;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+
+.button:hover {
+  background: #be123c;
+}
+
+/* =========================
+   DEMO BOX
+========================= */
+.demo-box {
+  margin-top: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  padding: 15px;
+  background: #111827;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+/* =========================
+   GRID / CARDS
+========================= */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  background: #111827;
+  padding: 20px;
+  border-radius: 10px;
+  width: 240px;
+}
+
+/* =========================
+   FLOW BOX
+========================= */
+.flow-box {
+  margin-top: 30px;
+  background: #111827;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================
+   CALCULATOR
+========================= */
+.calculator-section {
+  padding: 80px 20px;
+}
+
+.calculator-box {
+  margin-top: 30px;
+  background: #111827;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.calculator-box label {
+  display: block;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.calculator-box input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  margin-top: 5px;
+}
+
+.calculator-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #e11d48;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #22c55e;
+}
+
+/* =========================
+   CTA
+========================= */
+.cta-section {
+  padding: 80px 20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  background: #020617;
+  padding: 20px;
+  font-size: 13px;
+  opacity: 0.8;
+}
