@@ -9,27 +9,26 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       background: #0f172a;
-      color: white;
       text-align: center;
       padding: 30px 15px;
     }
 
     h1 {
+      color: white;
       margin-bottom: 5px;
     }
 
     p {
       color: #cbd5f5;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .phone {
-      width: 100%;
-      max-width: 375px;
+      max-width: 380px;
       margin: auto;
       background: black;
       border-radius: 40px;
-      padding: 15px;
+      padding: 12px;
       box-shadow: 0 0 30px rgba(0,0,0,0.7);
     }
 
@@ -47,7 +46,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      height: 500px;
+      height: 520px;
     }
 
     .header {
@@ -85,26 +84,44 @@
       margin-left: auto;
     }
 
-    .buttons {
-      padding: 10px;
+    .input-area {
       background: white;
+      padding: 10px;
       border-top: 1px solid #ddd;
     }
 
+    input {
+      width: 70%;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
     button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 6px;
+      padding: 10px 15px;
+      margin-left: 5px;
       border: none;
-      border-radius: 12px;
+      border-radius: 20px;
       background: #e11d48;
       color: white;
-      font-size: 15px;
       cursor: pointer;
     }
 
     button:hover {
       background: #be123c;
+    }
+
+    .options {
+      margin-top: 10px;
+    }
+
+    .option-btn {
+      display: block;
+      width: 100%;
+      margin-top: 5px;
+      border-radius: 10px;
+      background: #1f2937;
     }
   </style>
 </head>
@@ -123,53 +140,81 @@
         Code 3 Leads
       </div>
 
-      <div class="messages" id="chat">
+      <div class="messages" id="chat"></div>
 
-        <div class="bubble bot">
-          Hey! Sorry we missed your call.<br><br>
-          What can we help you with?<br><br>
-          1. Emergency<br>
-          2. Service Issue<br>
-          3. Quote/Estimate
+      <div class="input-area">
+        <input id="userInput" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+
+        <div class="options" id="options">
+          <button class="option-btn" onclick="selectOption(1)">1. Emergency</button>
+          <button class="option-btn" onclick="selectOption(2)">2. Service Issue</button>
+          <button class="option-btn" onclick="selectOption(3)">3. Quote / Estimate</button>
         </div>
-
-      </div>
-
-      <div class="buttons">
-        <button onclick="reply(1)">1. Emergency</button>
-        <button onclick="reply(2)">2. Service Issue</button>
-        <button onclick="reply(3)">3. Quote / Estimate</button>
       </div>
 
     </div>
   </div>
 
-  <script>
-    function reply(option) {
-      const chat = document.getElementById("chat");
+<script>
+let step = 0;
 
-      let user = document.createElement("div");
-      user.className = "bubble user";
-      user.innerText = option;
-      chat.appendChild(user);
+window.onload = function() {
+  addBotMessage("Hey! Sorry we missed your call.\n\nWhat can we help you with?\n\n1. Emergency\n2. Service Issue\n3. Quote/Estimate");
+};
 
-      let bot = document.createElement("div");
-      bot.className = "bubble bot";
+function addUserMessage(text){
+  const chat = document.getElementById("chat");
+  let msg = document.createElement("div");
+  msg.className = "bubble user";
+  msg.innerText = text;
+  chat.appendChild(msg);
+  chat.scrollTop = chat.scrollHeight;
+}
 
-      if(option == 1){
-        bot.innerText = "Got it — this looks urgent. We’re contacting a contractor now.";
-      } else if(option == 2){
-        bot.innerText = "Thanks! Please describe your issue and we’ll follow up shortly.";
-      } else {
-        bot.innerText = "Perfect — we’ll reach out with a quote ASAP.";
-      }
+function addBotMessage(text){
+  const chat = document.getElementById("chat");
+  let msg = document.createElement("div");
+  msg.className = "bubble bot";
+  msg.innerText = text;
+  chat.appendChild(msg);
+  chat.scrollTop = chat.scrollHeight;
+}
 
-      setTimeout(() => {
-        chat.appendChild(bot);
-        chat.scrollTop = chat.scrollHeight;
-      }, 400);
+function selectOption(option){
+  addUserMessage(option);
+  document.getElementById("options").style.display = "none";
+
+  setTimeout(() => {
+    if(option == 1){
+      addBotMessage("This looks urgent. What’s going on?");
+    } else if(option == 2){
+      addBotMessage("Got it. Can you describe the issue?");
+    } else {
+      addBotMessage("Sure — what type of work are you looking for?");
     }
-  </script>
+    step = 1;
+  }, 500);
+}
+
+function sendMessage(){
+  const input = document.getElementById("userInput");
+  const text = input.value.trim();
+  if(!text) return;
+
+  addUserMessage(text);
+  input.value = "";
+
+  setTimeout(() => {
+    if(step === 1){
+      addBotMessage("Perfect — we’ve sent this to the contractor.\n\n📲 They can call or text you directly shortly.");
+      step = 2;
+    } else {
+      addBotMessage("A contractor will be in touch shortly.");
+    }
+  }, 500);
+}
+</script>
 
 </body>
 </html>
