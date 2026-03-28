@@ -11,50 +11,41 @@
       background: #0f172a;
       text-align: center;
       padding: 30px 15px;
-    }
-
-    h1 {
       color: white;
-      margin-bottom: 5px;
     }
 
-    p {
-      color: #cbd5f5;
-      margin-bottom: 20px;
+    h1 { margin-bottom: 5px; }
+    p { color: #cbd5f5; margin-bottom: 20px; }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
     }
 
     .phone {
-      max-width: 380px;
-      margin: auto;
+      max-width: 350px;
       background: black;
       border-radius: 40px;
       padding: 12px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.7);
-    }
-
-    .notch {
-      width: 120px;
-      height: 25px;
-      background: #111;
-      border-radius: 20px;
-      margin: 0 auto 10px;
     }
 
     .screen {
       background: #f1f5f9;
       border-radius: 30px;
-      overflow: hidden;
+      height: 500px;
       display: flex;
       flex-direction: column;
-      height: 520px;
+      overflow: hidden;
     }
 
     .header {
       background: white;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      font-weight: bold;
       color: black;
+      padding: 10px;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
     }
 
     .messages {
@@ -64,155 +55,174 @@
     }
 
     .bubble {
-      padding: 10px 14px;
-      border-radius: 18px;
-      margin: 6px 0;
+      padding: 10px;
+      border-radius: 15px;
+      margin: 5px 0;
       max-width: 75%;
-      font-size: 14px;
-      line-height: 1.4;
     }
 
-    .bot {
-      background: #e5e7eb;
-      color: black;
-      text-align: left;
-    }
-
-    .user {
-      background: #2563eb;
-      color: white;
-      margin-left: auto;
-    }
+    .bot { background: #e5e7eb; color: black; }
+    .user { background: #2563eb; color: white; margin-left: auto; }
 
     .input-area {
       background: white;
       padding: 10px;
-      border-top: 1px solid #ddd;
     }
 
     input {
-      width: 70%;
-      padding: 10px;
-      border-radius: 20px;
+      width: 65%;
+      padding: 8px;
+      border-radius: 10px;
       border: 1px solid #ccc;
-      outline: none;
     }
 
     button {
-      padding: 10px 15px;
-      margin-left: 5px;
+      padding: 8px 12px;
+      border-radius: 10px;
       border: none;
-      border-radius: 20px;
       background: #e11d48;
       color: white;
       cursor: pointer;
     }
 
-    button:hover {
-      background: #be123c;
-    }
-
-    .options {
-      margin-top: 10px;
-    }
-
-    .option-btn {
+    .options button {
       display: block;
       width: 100%;
       margin-top: 5px;
-      border-radius: 10px;
       background: #1f2937;
     }
+
+    /* Contractor panel */
+    .panel {
+      max-width: 350px;
+      background: #020617;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .lead {
+      background: #1f2937;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .call-btn {
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
+      background: #22c55e;
+      text-align: center;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+    }
+
   </style>
 </head>
 
 <body>
 
-  <h1>Test the System</h1>
-  <p>Experience what your customers see after a missed call.</p>
+<h1>Live Demo</h1>
+<p>See both sides of the system in action</p>
 
+<div class="container">
+
+  <!-- CUSTOMER PHONE -->
   <div class="phone">
-    <div class="notch"></div>
-
     <div class="screen">
 
-      <div class="header">
-        Code 3 Leads
-      </div>
+      <div class="header">Customer</div>
 
       <div class="messages" id="chat"></div>
 
       <div class="input-area">
-        <input id="userInput" placeholder="Type your message...">
-        <button onclick="sendMessage()">Send</button>
+        <input id="input" placeholder="Type message...">
+        <button onclick="send()">Send</button>
 
         <div class="options" id="options">
-          <button class="option-btn" onclick="selectOption(1)">1. Emergency</button>
-          <button class="option-btn" onclick="selectOption(2)">2. Service Issue</button>
-          <button class="option-btn" onclick="selectOption(3)">3. Quote / Estimate</button>
+          <button onclick="choose(1)">1. Emergency</button>
+          <button onclick="choose(2)">2. Service Issue</button>
+          <button onclick="choose(3)">3. Quote</button>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 
+  <!-- CONTRACTOR PANEL -->
+  <div class="panel">
+    <h3>📲 New Lead Notification</h3>
+
+    <div class="lead" id="leadBox">
+      <strong>John Smith</strong><br>
+      📞 (410) 555-1234<br><br>
+      <span id="leadText"></span>
+
+      <a href="#" class="call-btn">Call Customer</a>
+      <a href="#" class="call-btn">Text Customer</a>
+    </div>
+  </div>
+
+</div>
+
 <script>
 let step = 0;
+let selected = "";
 
-window.onload = function() {
-  addBotMessage("Hey! Sorry we missed your call.\n\nWhat can we help you with?\n\n1. Emergency\n2. Service Issue\n3. Quote/Estimate");
+window.onload = () => {
+  bot("Hey! Sorry we missed your call.\n\nWhat can we help you with?");
 };
 
-function addUserMessage(text){
-  const chat = document.getElementById("chat");
-  let msg = document.createElement("div");
-  msg.className = "bubble user";
-  msg.innerText = text;
-  chat.appendChild(msg);
-  chat.scrollTop = chat.scrollHeight;
+function bot(text){
+  let m = document.createElement("div");
+  m.className = "bubble bot";
+  m.innerText = text;
+  chat.appendChild(m);
 }
 
-function addBotMessage(text){
-  const chat = document.getElementById("chat");
-  let msg = document.createElement("div");
-  msg.className = "bubble bot";
-  msg.innerText = text;
-  chat.appendChild(msg);
-  chat.scrollTop = chat.scrollHeight;
+function user(text){
+  let m = document.createElement("div");
+  m.className = "bubble user";
+  m.innerText = text;
+  chat.appendChild(m);
 }
 
-function selectOption(option){
-  addUserMessage(option);
+function choose(option){
+  selected = option;
+  user(option);
   document.getElementById("options").style.display = "none";
 
-  setTimeout(() => {
-    if(option == 1){
-      addBotMessage("This looks urgent. What’s going on?");
-    } else if(option == 2){
-      addBotMessage("Got it. Can you describe the issue?");
-    } else {
-      addBotMessage("Sure — what type of work are you looking for?");
-    }
-    step = 1;
-  }, 500);
+  if(option == 1){
+    bot("Emergency — what’s happening?");
+  } else if(option == 2){
+    bot("Describe the issue:");
+  } else {
+    bot("What type of work do you need?");
+  }
+
+  step = 1;
 }
 
-function sendMessage(){
-  const input = document.getElementById("userInput");
-  const text = input.value.trim();
-  if(!text) return;
+function send(){
+  let val = input.value;
+  if(!val) return;
 
-  addUserMessage(text);
+  user(val);
   input.value = "";
 
-  setTimeout(() => {
-    if(step === 1){
-      addBotMessage("Perfect — we’ve sent this to the contractor.\n\n📲 They can call or text you directly shortly.");
-      step = 2;
-    } else {
-      addBotMessage("A contractor will be in touch shortly.");
-    }
-  }, 500);
+  if(step === 1){
+    bot("Got it — sending to contractor now...");
+
+    setTimeout(() => {
+      document.getElementById("leadBox").style.display = "block";
+      document.getElementById("leadText").innerText = val;
+
+      bot("✅ Contractor notified. They will contact you shortly.");
+    }, 800);
+  }
 }
 </script>
 
