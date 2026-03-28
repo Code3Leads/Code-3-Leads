@@ -174,18 +174,16 @@
 
 <script>
 let step = 0;
-let selected = "";
+let selectedText = "";
 
 window.onload = () => {
   bot("📞 Incoming Call...");
   
-  setTimeout(() => {
-    bot("❌ Missed Call");
-  }, 1200);
+  setTimeout(() => bot("❌ Missed Call"), 1000);
 
   setTimeout(() => {
     bot("Hey! Sorry we missed your call.\n\nWhat can we help you with?");
-  }, 2200);
+  }, 2000);
 };
 
 function bot(text){
@@ -193,6 +191,7 @@ function bot(text){
   m.className = "bubble bot";
   m.innerText = text;
   chat.appendChild(m);
+  chat.scrollTop = chat.scrollHeight;
 }
 
 function user(text){
@@ -200,22 +199,33 @@ function user(text){
   m.className = "bubble user";
   m.innerText = text;
   chat.appendChild(m);
+  chat.scrollTop = chat.scrollHeight;
 }
 
 function choose(option){
-  selected = option;
-  user(option);
-  document.getElementById("options").style.display = "none";
 
   if(option == 1){
-    bot("Emergency — what’s happening?");
+    selectedText = "Emergency Service";
   } else if(option == 2){
-    bot("Describe the issue:");
+    selectedText = "Service Issue";
   } else {
-    bot("What type of work do you need?");
+    selectedText = "Quote Request";
   }
 
-  step = 1;
+  user(selectedText);
+
+  document.getElementById("options").style.display = "none";
+
+  setTimeout(() => {
+    if(option == 1){
+      bot("Emergency — what’s happening?");
+    } else if(option == 2){
+      bot("Can you describe the issue?");
+    } else {
+      bot("What are you looking to get a quote for?");
+    }
+    step = 1;
+  }, 400);
 }
 
 function send(){
@@ -226,13 +236,18 @@ function send(){
   input.value = "";
 
   if(step === 1){
+
     bot("Got it — sending to contractor now...");
 
     setTimeout(() => {
+
       document.getElementById("leadBox").style.display = "block";
-      document.getElementById("leadText").innerText = val;
+
+      document.getElementById("leadText").innerText =
+        selectedText + ": " + val;
 
       bot("✅ Contractor notified. They will contact you shortly.");
+
     }, 800);
   }
 }
