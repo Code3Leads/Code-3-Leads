@@ -6,75 +6,100 @@
 
   <style>
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       background: #0f172a;
       color: white;
       text-align: center;
-      margin: 0;
-      padding: 40px 20px;
+      padding: 30px 15px;
     }
 
     h1 {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     p {
       color: #cbd5f5;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .phone {
-      max-width: 350px;
+      width: 100%;
+      max-width: 375px;
       margin: auto;
-      background: #020617;
+      background: black;
+      border-radius: 40px;
+      padding: 15px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+    }
+
+    .notch {
+      width: 120px;
+      height: 25px;
+      background: #111;
       border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      margin: 0 auto 10px;
     }
 
     .screen {
-      background: #111827;
-      border-radius: 15px;
-      padding: 15px;
-      height: 400px;
-      overflow-y: auto;
-      text-align: left;
+      background: #f1f5f9;
+      border-radius: 30px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 500px;
     }
 
-    .message {
-      margin: 10px 0;
+    .header {
+      background: white;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      font-weight: bold;
+      color: black;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .bubble {
       padding: 10px 14px;
-      border-radius: 15px;
-      max-width: 80%;
-      display: inline-block;
+      border-radius: 18px;
+      margin: 6px 0;
+      max-width: 75%;
       font-size: 14px;
+      line-height: 1.4;
     }
 
     .bot {
-      background: #1f2937;
-      color: white;
+      background: #e5e7eb;
+      color: black;
+      text-align: left;
     }
 
     .user {
       background: #2563eb;
       color: white;
       margin-left: auto;
-      display: block;
     }
 
     .buttons {
-      margin-top: 15px;
+      padding: 10px;
+      background: white;
+      border-top: 1px solid #ddd;
     }
 
     button {
       width: 100%;
       padding: 12px;
-      margin-top: 8px;
+      margin-top: 6px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       background: #e11d48;
       color: white;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
     }
 
@@ -86,27 +111,36 @@
 
 <body>
 
-  <h1>Test the Missed Call System</h1>
-  <p>See exactly what your customers experience when you miss a call.</p>
+  <h1>Test the System</h1>
+  <p>Experience what your customers see after a missed call.</p>
 
   <div class="phone">
-    <div class="screen" id="chat">
+    <div class="notch"></div>
 
-      <div class="message bot">
-        📱 Incoming Text:<br><br>
-        "Hey! Sorry we missed your call.<br><br>
-        What can we help you with?<br><br>
-        1. Emergency<br>
-        2. Service Issue<br>
-        3. Quote/Estimate"
+    <div class="screen">
+
+      <div class="header">
+        Code 3 Leads
       </div>
 
-    </div>
+      <div class="messages" id="chat">
 
-    <div class="buttons">
-      <button onclick="reply(1)">1. Emergency</button>
-      <button onclick="reply(2)">2. Service Issue</button>
-      <button onclick="reply(3)">3. Quote / Estimate</button>
+        <div class="bubble bot">
+          Hey! Sorry we missed your call.<br><br>
+          What can we help you with?<br><br>
+          1. Emergency<br>
+          2. Service Issue<br>
+          3. Quote/Estimate
+        </div>
+
+      </div>
+
+      <div class="buttons">
+        <button onclick="reply(1)">1. Emergency</button>
+        <button onclick="reply(2)">2. Service Issue</button>
+        <button onclick="reply(3)">3. Quote / Estimate</button>
+      </div>
+
     </div>
   </div>
 
@@ -114,28 +148,26 @@
     function reply(option) {
       const chat = document.getElementById("chat");
 
-      let userMsg = document.createElement("div");
-      userMsg.className = "message user";
-      userMsg.innerText = option;
-      chat.appendChild(userMsg);
+      let user = document.createElement("div");
+      user.className = "bubble user";
+      user.innerText = option;
+      chat.appendChild(user);
 
-      let botMsg = document.createElement("div");
-      botMsg.className = "message bot";
+      let bot = document.createElement("div");
+      bot.className = "bubble bot";
 
-      if (option == 1) {
-        botMsg.innerText = "Got it — this looks urgent. A contractor will contact you ASAP.";
-      } 
-      else if (option == 2) {
-        botMsg.innerText = "Thanks! Please briefly describe the issue and we’ll follow up shortly.";
-      } 
-      else {
-        botMsg.innerText = "Great — we’ll reach out to provide a quote as soon as possible.";
+      if(option == 1){
+        bot.innerText = "Got it — this looks urgent. We’re contacting a contractor now.";
+      } else if(option == 2){
+        bot.innerText = "Thanks! Please describe your issue and we’ll follow up shortly.";
+      } else {
+        bot.innerText = "Perfect — we’ll reach out with a quote ASAP.";
       }
 
       setTimeout(() => {
-        chat.appendChild(botMsg);
+        chat.appendChild(bot);
         chat.scrollTop = chat.scrollHeight;
-      }, 500);
+      }, 400);
     }
   </script>
 
