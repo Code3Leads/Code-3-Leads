@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Missed Call Demo | Code 3 Leads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #cbd5f5;
+      margin-bottom: 30px;
+    }
+
+    .phone {
+      max-width: 350px;
+      margin: auto;
+      background: #020617;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .screen {
+      background: #111827;
+      border-radius: 15px;
+      padding: 15px;
+      height: 400px;
+      overflow-y: auto;
+      text-align: left;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 10px 14px;
+      border-radius: 15px;
+      max-width: 80%;
+      display: inline-block;
+      font-size: 14px;
+    }
+
+    .bot {
+      background: #1f2937;
+      color: white;
+    }
+
+    .user {
+      background: #2563eb;
+      color: white;
+      margin-left: auto;
+      display: block;
+    }
+
+    .buttons {
+      margin-top: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border: none;
+      border-radius: 10px;
+      background: #e11d48;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #be123c;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Test the Missed Call System</h1>
+  <p>See exactly what your customers experience when you miss a call.</p>
+
+  <div class="phone">
+    <div class="screen" id="chat">
+
+      <div class="message bot">
+        📱 Incoming Text:<br><br>
+        "Hey! Sorry we missed your call.<br><br>
+        What can we help you with?<br><br>
+        1. Emergency<br>
+        2. Service Issue<br>
+        3. Quote/Estimate"
+      </div>
+
+    </div>
+
+    <div class="buttons">
+      <button onclick="reply(1)">1. Emergency</button>
+      <button onclick="reply(2)">2. Service Issue</button>
+      <button onclick="reply(3)">3. Quote / Estimate</button>
+    </div>
+  </div>
+
+  <script>
+    function reply(option) {
+      const chat = document.getElementById("chat");
+
+      let userMsg = document.createElement("div");
+      userMsg.className = "message user";
+      userMsg.innerText = option;
+      chat.appendChild(userMsg);
+
+      let botMsg = document.createElement("div");
+      botMsg.className = "message bot";
+
+      if (option == 1) {
+        botMsg.innerText = "Got it — this looks urgent. A contractor will contact you ASAP.";
+      } 
+      else if (option == 2) {
+        botMsg.innerText = "Thanks! Please briefly describe the issue and we’ll follow up shortly.";
+      } 
+      else {
+        botMsg.innerText = "Great — we’ll reach out to provide a quote as soon as possible.";
+      }
+
+      setTimeout(() => {
+        chat.appendChild(botMsg);
+        chat.scrollTop = chat.scrollHeight;
+      }, 500);
+    }
+  </script>
+
+</body>
+</html>
