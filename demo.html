@@ -156,13 +156,17 @@
   <div class="panel">
     <h3>📲 New Lead Notification</h3>
 
+    <p style="color:#22c55e; font-size:14px;">
+⚡ This lead came from a missed call — without this system, it was lost.
+</p>
+
     <div class="lead" id="leadBox">
       <strong>John Smith</strong><br>
       📞 (410) 555-1234<br><br>
       <span id="leadText"></span>
 
-      <a href="#" class="call-btn">Call Customer</a>
-      <a href="#" class="call-btn">Text Customer</a>
+<a href="tel:14105551234" class="call-btn">📞 Call Customer</a>
+<a href="sms:14105551234" class="call-btn">💬 Text Customer</a>
     </div>
   </div>
 
@@ -173,7 +177,15 @@ let step = 0;
 let selected = "";
 
 window.onload = () => {
-  bot("Hey! Sorry we missed your call.\n\nWhat can we help you with?");
+  bot("📞 Incoming Call...");
+  
+  setTimeout(() => {
+    bot("❌ Missed Call");
+  }, 1200);
+
+  setTimeout(() => {
+    bot("Hey! Sorry we missed your call.\n\nWhat can we help you with?");
+  }, 2200);
 };
 
 function bot(text){
