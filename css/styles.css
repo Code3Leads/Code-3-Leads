@@ -13,30 +13,31 @@ body {
    HEADER
 ========================= */
 header {
-  padding: 20px;
+  padding: 10px 20px; /* reduced from 20px */
   background: rgba(2,6,23,0.9);
 }
 
 .logo {
-  width: 260px;
+  width: 140px; /* reduced from 260px */
 }
 
 .tagline {
-  font-size: 14px;
+  font-size: 12px; /* slightly smaller */
   color: #e11d48;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 5px; /* tighter spacing */
 }
 
 nav {
-  margin-top: 10px;
+  margin-top: 5px; /* reduced */
 }
 
 nav a {
   color: white;
-  margin: 0 10px;
+  margin: 0 8px; /* tighter spacing */
   text-decoration: none;
   font-weight: bold;
+  font-size: 14px; /* cleaner look */
 }
 
 nav a:hover {
